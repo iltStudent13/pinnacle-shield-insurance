@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+/* .hidden {
+  display: none;
+} */
+
 body {
   background-color: #e4e9f3;
   font-family: Arial, sans-serif;
@@ -39,6 +43,23 @@ footer {
   width: 100%;
   box-sizing: border-box;
   background-color: #212529;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* alter icons used on cards to flexible size and max size on cards */
+.card-img-top {
+  max-width: 100%;
+  height: auto;
+  max-height: 80px; /* or your preferred value */
+  object-fit: contain; /* ensures the whole image is visible */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 footer .container {

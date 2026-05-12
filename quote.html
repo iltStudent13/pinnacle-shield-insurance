@@ -38,6 +38,312 @@
       </ul>
       </div>
     </nav>
-        <script src="js/main.js"></script>
+  <main>
+    <section>
+        <div class="container my-5">
+            <h2 class="text-center mb-4">Get Your Free Quote</h2>
+            <p class="text-center mb-4">Fill out the form below to receive your personalized insurance quote.</p>
+    </section>
+    <!-- This section of 3 clickable cards Auto/Home/Life Insurance that then opens an input form -->
+  <section>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Choose Your Insurance Type</h2>
+        <div class="row">
+        <div class="col-md-4 mb-4"> 
+            <input type="radio" class="btn-check" name="insuranceType" id="autoQuote" value="autoQuote" autocomplete="off"> 
+          <button class="card h-100 shadow-sm border border-success mb-2 w-100 p-0 get-quote-btn" data-insurance="Auto Insurance" style="border:none; text-align:left;" type="button" id="autoCardBtn">
+                <div class="card-body"> <img src="https://tse4.mm.bing.net/th/id/OIP.xIJvW_p49dWeiXUDYVwqwwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top img-fluid" alt="Auto Insurance"> 
+                    <h3 class="h5 card-title text-center mb-0">Auto Insurance</h3> 
+                </div> 
+            </button> 
+        </div>
+          <div class="col-md-4 mb-4">
+            <input type="radio" class="btn-check" name="insuranceType" id="homeQuote" value="homeQuote" autocomplete="off">
+            <button class="card h-100 shadow-sm border border-primary mb-2 w-100 p-0 get-quote-btn" data-insurance="Home Insurance" style="border:none; text-align:left;" type="button" id="homeCardBtn">
+              <div class="card-body">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.71s0bE4xXuDHwV6ETtUOUgAAAA?o=7&rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top img-fluid" alt="Home Insurance">
+                <h3 class="h5 card-title text-center">Home Insurance</h3>
+              </div>
+            </button>
+          </div>
+          <div class="col-md-4 mb-4">
+            <input type="radio" class="btn-check" name="insuranceType" id="lifeQuote" value="lifeQuote" autocomplete="off">
+            <button class="card h-100 shadow-sm border border-danger mb-2 w-100 p-0 get-quote-btn" data-insurance="Life Insurance" style="border:none; text-align:left;" type="button" id="lifeCardBtn">
+              <div class="card-body">
+                <img src="https://th.bing.com/th/id/R.39591bf0035e71946d4228b3a7bbccfe?rik=p1YESydVv%2bdCgg&pid=ImgRaw&r=0" class="card-img-top img-fluid" alt="Life Insurance">
+                <h3 class="h5 card-title text-center">Life Insurance</h3>
+              </div>
+            </button>
+        </div>
+  </section>
+  <!-- Inline Quote Form (hidden by default) -->
+  <div class="container my-4" id="auto-fields" style="display:none;">
+    <!-- all auto fields go here -->
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h5 class="card-title" id="inlineQuoteFormTitle">Get a Quote</h5>
+        <form id="inlineQuoteForm">
+          <div class="mb-3" id="autoField1">
+            <label for="carDriverName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="carDriverName" name="carDriverName" minlength="2" maxlength="100" required>
+          </div>
+          <div class="mb-3" id="autoField2">
+            <label for="carDriverAge" class="form-label">Age</label>
+            <input type="number" class="form-control" id="carDriverAge" name="carDriverAge" min="16" max="100" step="1" required>
+            <div class="invalid-feedback">Please enter a valid age (16–100).</div>
+          </div>
+          <div class="mb-3" id="autoField3">
+            <label for="carZipCode" class="form-label">Zip Code</label>
+            <input type="number" class="form-control" id="carZipCode" name="carZipCode" pattern="^\d{5}$" title="Enter exactly 5 digits" required>
+            <div class="invalid-feedback">Please enter exactly 5 digits (0–9).</div>
+          </div>
+          <div class="mb-3" id="autoField4">
+            <label for="vehicleYear" class="form-label">Vehicle Year</label>
+            <input type="number" class="form-control" id="vehicleYear" name="vehicleYear" min="1990" max="2026" step="1" required>
+            <div class="invalid-feedback">Please enter a valid year (1990–2026).</div>
+          </div>
+          <div class="mb-3" id="autoField5">
+            <label for="vehicleMake" class="form-label">Vehicle Make</label>
+            <select id="vehicleMake" name="vehicleMake" class="form-select">
+                <option value="Toyota">Toyota</option>
+                <option value="Honda">Honda</option>
+                <option value="Ford">Ford</option>
+                <option value="BMW">BMW</option>
+                <option value="Tesla">Tesla</option>
+                <option value="Other">Other</option>
+            </select>
+            <!-- <input type="text" class="form-control" id="vehicleMakeOther" name="vehicleMakeOther" style="display:none;"> -->
+          </div>
+          <div class="mb-3" id="autoField6">
+            <label for="vehicleModel" class="form-label">Vehicle Model</label>
+            <input type="text" class="form-control" id="vehicleModel" name="vehicleModel" minlength="1" maxlength="50" required>
+          </div>
+          <div class="mb-3" id="autoField7">
+            <label for="vehicleMileage" class="form-label">Annual Mileage</label>
+            <select id="vehicleMileage" name="vehicleMileage" class="form-select">
+                <option value="Under 5000">Under 5,000</option>
+                <option value="5000-10000">5,000-10,000</option>
+                <option value="10000-20000">10,000-20,000</option>
+                <option value="20000-50000">20,000+</option>
+            </select>
+          </div>
+          <div class="mb-3" id="autoField8">
+            <label for="drivingRecord" class="form-label">Driving Record</label>
+            <select id="drivingRecord" name="drivingRecord" class="form-select">
+                <option value="Clean">Clean</option>
+                <option value="oneTicket">1 Ticket</option>
+                <option value="twoPlusTickets">2+ Tickets</option>
+                <option value="accident">Accident in Last 3 Years</option>
+            </select>
+          </div>
+          <div class="mb-3" id="autoField9">
+            <label for="coverageLevelAuto" class="form-label">Coverage Level</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="coverageLevelAuto" id="BasicAuto" value="Basic" required>
+                <label class="form-check-label" for="BasicAuto">Basic</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="coverageLevelAuto" id="StandardAuto" value="Standard">
+                <label class="form-check-label" for="StandardAuto">Standard</label>
+            </div>
+            <div class="form-check">    
+                <input class="form-check-input" type="radio" name="coverageLevelAuto" id="PremiumAuto" value="Premium">
+                <label class="form-check-label" for="PremiumAuto">Premium</label>
+            </div>
+          </div>
+        </div>
+  <div class="container my-4" id="home-fields" style="display:none;">
+        <!-- all home fields go here -->
+        <div class="mb-3" id="homeField1">
+            <label for="homeOwnerName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="homeOwnerName" name="homeOwnerName" minlength="2" maxlength="100" required>
+        </div>
+        <div class="mb-3" id="homeField2">
+            <label for="homeOwnerAge" class="form-label">Age</label>
+            <input type="number" class="form-control" id="homeOwnerAge" name="homeOwnerAge" min="18" max="100" step="1" required>
+            <div class="invalid-feedback">Please enter a valid age (18–100).</div>
+          </div>
+        <div class="mb-3" id="homeField3">
+            <label for="homeZipCode" class="form-label">Zip Code</label>
+            <input type="number" class="form-control" id="homeZipCode" name="homeZipCode" pattern="^\d{5}$" title="Enter exactly 5 digits" required>
+            <div class="invalid-feedback">Please enter exactly 5 digits (0–9).</div>
+          </div>
+        <div class="mb-3" id="homeField4">
+            <label for="homeValue" class="form-label">Home Value</label>
+            <input type="number" class="form-control" id="homeValue" name="homeValue" min="50000" max="10000000" step="1000" required>
+            <div class="invalid-feedback">Please enter a valid home value ($50,000–$10,000,000).</div>
+          </div>
+          <div class="mb-3" id="homeField5">
+            <label for="yearBuilt" class="form-label">Year Built</label>
+            <input type="number" class="form-control" id="yearBuilt" name="yearBuilt" min="1900" max="2026" step="1" required>
+            <div class="invalid-feedback">Please enter a valid year (1900–2026).</div>
+          </div>
+          <div class="mb-3" id="homeField6">
+             <label for="squareFootage" class="form-label">Square Footage</label>
+             <input type="number" class="form-control" id="squareFootage" name="squareFootage" min="500" max="10000" step="10" required>
+             <div class="invalid-feedback">Please enter a valid square footage (500–10,000).</div>
+          </div>
+          <div class="mb-3" id="homeField7">
+          <label for="constructionType" class="form-label">Construction Type</label>
+            <select id="constructionType" name="constructionType" class="form-select">
+                <option value="woodFrame">Wood Frame</option>
+                <option value="brick">Brick</option>
+                <option value="concrete">Concrete</option>
+                <option value="steel">Steel</option>
+            </select>
+          </div>
+          <div class="mb-3" id="homeField8">
+            <label for="hasSecuritySystem" class="form-label">Has Security System</label>
+            <input type="checkbox" class="form-check-input" id="hasSecuritySystem" name="hasSecuritySystem">
+          </div>
+        <div class="mb-3" id="homeField9">
+            <label for="hasFireSprinklers" class="form-label">Has Fire Sprinklers</label>
+            <input type="checkbox" class="form-check-input" id="hasFireSprinklers" name="hasFireSprinklers">
+          </div>
+          <div class="mb-3" id="homeField10">
+            <label for="coverageLevelHome" class="form-label">Coverage Level</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="coverageLevelHome" id="BasicHome" value="Basic" required>
+                <label class="form-check-label" for="BasicHome">Basic</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="coverageLevelHome" id="StandardHome" value="Standard">
+                <label class="form-check-label" for="StandardHome">Standard</label>
+            </div>
+            <div class="form-check">    
+                <input class="form-check-input" type="radio" name="coverageLevelHome" id="PremiumHome" value="Premium">
+                <label class="form-check-label" for="PremiumHome">Premium</label>
+            </div>
+          </div>
+                  </div>
+  <div class="container my-4" id="life-fields" style="display:none;">
+        <!-- all life fields go here -->
+          <div class="mb-3" id="lifeField1">
+            <label for="lifeName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="lifeName" name="lifeName" minlength="2" maxlength="100" required>
+          </div>
+          <div class="mb-3" id="lifeField2">
+            <label for="lifeAge" class="form-label">Age</label>
+            <input type="number" class="form-control" id="lifeAge" name="lifeAge" min="18" max="85" step="1">
+            <div class="invalid-feedback">Please enter a valid age (18–85).</div>
+          </div>
+        <div class="mb-3" id="lifeField3">
+            <label for="lifeZipCode" class="form-label">Zip Code</label>
+            <input type="number" class="form-control" id="lifeZipCode" name="lifeZipCode" pattern="^\d{5}$" title="Enter exactly 5 digits" required>
+            <div class="invalid-feedback">Please enter exactly 5 digits (0–9).</div>
+          </div>
+          <div class="mb-3" id="lifeField4">
+          <label for="lifeGender" class="form-label">Gender</label>
+            <select id="lifeGender" name="lifeGender" class="form-select">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Non-binary</option>
+            </select>
+          </div>
+        <div class="mb-3" id="lifeField5">
+            <label for="smoker" class="form-label">Smoker</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="smoker" id="smokerYes" value="Yes" required>
+                <label class="form-check-label" for="smokerYes">Yes</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="smoker" id="smokerNo" value="No">
+                <label class="form-check-label" for="smokerNo">No</label>
+            </div>
+          </div>
+        <div class="mb-3" id="lifeField6">
+            <label for="lifeCoverageAmount" class="form-label">Coverage Amount</label>
+            <select id="lifeCoverageAmount" name="lifeCoverageAmount" class="form-select">
+                <option value="hundredThousand">100,000</option>
+                <option value="twoHundredFiftyThousand">250,000</option>
+                <option value="fiveHundredThousand">500,000</option>
+                <option value="oneMillion">1,000,000</option>
+            </select>
+          </div>
+        <div class="mb-3" id="lifeField7">
+            <label for="exerciseFrequency" class="form-label">Exercise Frequency</label>
+            <select id="exerciseFrequency" name="exerciseFrequency" class="form-select">
+                <option value="none">Rarely</option>
+                <option value="occasional">1-2 times/week</option>
+                <option value="regular">3-4 times/week</option>
+                <option value="frequent">5+ times/week</option>
+            </select>
+          </div>
+        <div class="mb-3" id="lifeField8">
+        <label for="coverageLevelLife" class="form-label">Coverage Level</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="coverageLevelLife" id="BasicLife" value="Basic" required>
+                <label class="form-check-label" for="BasicLife">Basic</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="coverageLevelLife" id="StandardLife" value="Standard">
+                <label class="form-check-label" for="StandardLife">Standard</label>
+            </div>
+            <div class="form-check">    
+                <input class="form-check-input" type="radio" name="coverageLevelLife" id="PremiumLife" value="Premium">
+                <label class="form-check-label" for="PremiumLife">Premium</label>
+            </div>
+          </div>
+          <input type="hidden" id="insuranceType" name="insuranceType">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+  </body>
+<footer class="bg-dark text-white text-center text-lg-start px-2">
+      <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Pinnacle Shield Insurance</h5>
+            <p>
+              Providing reliable insurance solutions for over 20 years. Your safety is our priority.
+            </p>
+          </div>
+          <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Contact Us</h5>
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="mailto:info@pinnacleshield.com" class="text-white">info@pinnacleshield.com</a>
+              </li>
+              <li>
+                <a href="tel:+1234567890" class="text-white">+1 (234) 567-890</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-12 text-center mt-3">
+            <p class="mb-0">&copy; 2024 Pinnacle Shield Insurance. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+        <!-- JS script for quote processing -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <!-- end of processing -->
+    <script src="js/main.js"></script>
+    <!-- Event listener to detect which type of insurance is selected -->
+    <script>
+      var typeRadios = document.querySelectorAll('input[name="insuranceType"]');
+      typeRadios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+          // Hide all sections
+          var autoFields = document.getElementById('auto-fields');
+          var homeFields = document.getElementById('home-fields');
+          var lifeFields = document.getElementById('life-fields');
+          if (autoFields) autoFields.style.display = 'none';
+          if (homeFields) homeFields.style.display = 'none';
+          if (lifeFields) lifeFields.style.display = 'none';
+          // Show the selected section
+          var selected = this.value + '-fields';
+          var selectedFields = document.getElementById(selected);
+          if (selectedFields) selectedFields.style.display = 'block';
+        });
+      });
+    </script>
   </body>
 </html>
