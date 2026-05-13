@@ -46,43 +46,42 @@
     </section>
     <!-- This section of 3 clickable cards Auto/Home/Life Insurance that then opens an input form -->
   <section>
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Choose Your Insurance Type</h2>
-        <div class="row">
-        <div class="col-md-4 mb-4"> 
-            <input type="radio" class="btn-check" name="insuranceType" id="autoQuote" value="autoQuote" autocomplete="off"> 
-          <button class="card h-100 shadow-sm border border-success mb-2 w-100 p-0 get-quote-btn" data-insurance="Auto Insurance" style="border:none; text-align:left;" type="button" id="autoCardBtn">
-                <div class="card-body"> <img src="https://tse4.mm.bing.net/th/id/OIP.xIJvW_p49dWeiXUDYVwqwwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top img-fluid" alt="Auto Insurance"> 
-                    <h3 class="h5 card-title text-center mb-0">Auto Insurance</h3> 
-                </div> 
-            </button> 
-        </div>
+    <div class="container my-5"> <h2 class="text-center mb-4">Choose Your Insurance Type</h2> <div class="row"> 
+      <div class="col-md-4 mb-4"> 
+        <input type="radio" class="btn-check" name="insuranceType" id="autoQuote" value="autoQuote" autocomplete="off"> 
+        <label class="btn btn-outline-success card h-100 shadow-sm mb-0 p-0 text-start" for="autoQuote" data-insurance="Auto Insurance"> 
+          <div class="card-body">
+            <h3 class="h5 card-title text-center mb-0">Auto Insurance</h3> 
+            <div class="text-center">🚗</div>
+          </div> 
+        </label> 
+      </div>
           <div class="col-md-4 mb-4">
-            <input type="radio" class="btn-check" name="insuranceType" id="homeQuote" value="homeQuote" autocomplete="off">
-            <button class="card h-100 shadow-sm border border-primary mb-2 w-100 p-0 get-quote-btn" data-insurance="Home Insurance" style="border:none; text-align:left;" type="button" id="homeCardBtn">
-              <div class="card-body">
-                <img src="https://tse2.mm.bing.net/th/id/OIP.71s0bE4xXuDHwV6ETtUOUgAAAA?o=7&rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top img-fluid" alt="Home Insurance">
-                <h3 class="h5 card-title text-center">Home Insurance</h3>
-              </div>
-            </button>
-          </div>
-          <div class="col-md-4 mb-4">
-            <input type="radio" class="btn-check" name="insuranceType" id="lifeQuote" value="lifeQuote" autocomplete="off">
-            <button class="card h-100 shadow-sm border border-danger mb-2 w-100 p-0 get-quote-btn" data-insurance="Life Insurance" style="border:none; text-align:left;" type="button" id="lifeCardBtn">
-              <div class="card-body">
-                <img src="https://th.bing.com/th/id/R.39591bf0035e71946d4228b3a7bbccfe?rik=p1YESydVv%2bdCgg&pid=ImgRaw&r=0" class="card-img-top img-fluid" alt="Life Insurance">
-                <h3 class="h5 card-title text-center">Life Insurance</h3>
-              </div>
-            </button>
-        </div>
+  <input type="radio" class="btn-check" name="insuranceType" id="homeQuote" value="homeQuote" autocomplete="off">
+  <label class="btn btn-outline-primary card h-100 shadow-sm mb-0 p-0 text-start" for="homeQuote" data-insurance="Home Insurance">
+    <div class="card-body">
+      <h3 class="h5 card-title text-center mb-0">Home Insurance</h3>
+      <div class="text-center">🏠</div>
+    </div>
+  </label>
+</div>
+<div class="col-md-4 mb-4">
+  <input type="radio" class="btn-check" name="insuranceType" id="lifeQuote" value="lifeQuote" autocomplete="off">
+  <label class="btn btn-outline-danger card h-100 shadow-sm mb-0 p-0 text-start" for="lifeQuote" data-insurance="Life Insurance">
+    <div class="card-body">
+      <h3 class="h5 card-title text-center mb-0">Life Insurance</h3>
+      <div class="text-center">💖</div>
+    </div>
+  </label>
+</div>
   </section>
   <!-- Inline Quote Form (hidden by default) -->
   <div class="container my-4" id="auto-fields" style="display:none;">
     <!-- all auto fields go here -->
-    <div class="card shadow-sm border-0">
-      <div class="card-body">
-        <h5 class="card-title" id="inlineQuoteFormTitle">Get a Quote</h5>
-        <form id="inlineQuoteForm">
+    <!-- <div class="card shadow-sm border-0">
+      <div class="card-body"> -->
+        <!-- <h5 class="card-title" id="inlineQuoteFormTitle">Get a Quote</h5> -->
+        <form id="inlineQuoteFormAuto">
           <div class="mb-3" id="autoField1">
             <label for="carDriverName" class="form-label">Full Name</label>
             <input type="text" class="form-control" id="carDriverName" name="carDriverName" minlength="2" maxlength="100" required>
@@ -151,8 +150,15 @@
                 <label class="form-check-label" for="PremiumAuto">Premium</label>
             </div>
           </div>
+          <!-- add submit button -->
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Get Quote</button>
+          </div>
         </div>
-  <div class="container my-4" id="home-fields" style="display:none;">
+</form>
+</div>
+<div class="container my-4" id="home-fields" style="display:none;">
+  <form id="inlineQuoteFormHome">
         <!-- all home fields go here -->
         <div class="mb-3" id="homeField1">
             <label for="homeOwnerName" class="form-label">Full Name</label>
@@ -214,9 +220,16 @@
                 <input class="form-check-input" type="radio" name="coverageLevelHome" id="PremiumHome" value="Premium">
                 <label class="form-check-label" for="PremiumHome">Premium</label>
             </div>
+        
           </div>
-                  </div>
+                    <!-- add submit button -->
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Get Quote</button>
+          </div>
+        </div>
+      </form>
   <div class="container my-4" id="life-fields" style="display:none;">
+    <form id="inlineQuoteFormLife">
         <!-- all life fields go here -->
           <div class="mb-3" id="lifeField1">
             <label for="lifeName" class="form-label">Full Name</label>
@@ -326,24 +339,47 @@
     ></script>
     <!-- end of processing -->
     <script src="js/main.js"></script>
-    <!-- Event listener to detect which type of insurance is selected -->
-    <script>
-      var typeRadios = document.querySelectorAll('input[name="insuranceType"]');
-      typeRadios.forEach(function(radio) {
-        radio.addEventListener('change', function() {
-          // Hide all sections
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var typeRadios = document.querySelectorAll('input[name="insuranceType"]');
           var autoFields = document.getElementById('auto-fields');
           var homeFields = document.getElementById('home-fields');
           var lifeFields = document.getElementById('life-fields');
-          if (autoFields) autoFields.style.display = 'none';
-          if (homeFields) homeFields.style.display = 'none';
-          if (lifeFields) lifeFields.style.display = 'none';
-          // Show the selected section
-          var selected = this.value + '-fields';
-          var selectedFields = document.getElementById(selected);
-          if (selectedFields) selectedFields.style.display = 'block';
+
+          function showFields(selected) {
+            if (autoFields) autoFields.style.display = 'none';
+            if (homeFields) homeFields.style.display = 'none';
+            if (lifeFields) lifeFields.style.display = 'none';
+            // Map radio value to correct container id
+            var map = {
+              autoQuote: 'auto-fields',
+              homeQuote: 'home-fields',
+              lifeQuote: 'life-fields'
+            };
+            var selectedId = map[selected] || (selected + '-fields');
+            var selectedFields = document.getElementById(selectedId);
+            if (selectedFields) selectedFields.style.display = 'block';
+          }
+
+          typeRadios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+              showFields(this.value);
+            });
+          });
+
+          // Make cards clickable by listening to label clicks
+          var cardLabels = document.querySelectorAll('label[for^="autoQuote"], label[for^="homeQuote"], label[for^="lifeQuote"]');
+          cardLabels.forEach(function(label) {
+            label.addEventListener('click', function() {
+              var forId = label.getAttribute('for');
+              var radio = document.getElementById(forId);
+              if (radio && !radio.checked) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+            });
+          });
         });
-      });
-    </script>
+      </script>
   </body>
 </html>
