@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+    <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
         <div class ="container-fluid">
                   <a class="navbar-brand" href="#">Pinnacle Shield Insurance</a>
@@ -46,7 +47,9 @@
     </section>
     <!-- This section of 3 clickable cards Auto/Home/Life Insurance that then opens an input form -->
   <section>
-    <div class="container my-5"> <h2 class="text-center mb-4">Choose Your Insurance Type</h2> <div class="row"> 
+    <div class="container my-5"> 
+        <h2 class="text-center mb-4">Choose Your Insurance Type</h2> 
+        <div class="row"> 
       <div class="col-md-4 mb-4"> 
         <input type="radio" class="btn-check" name="insuranceType" id="autoQuote" value="autoQuote" autocomplete="off"> 
         <label class="btn btn-outline-success card h-100 shadow-sm mb-0 p-0 text-start" for="autoQuote" data-insurance="Auto Insurance"> 
@@ -78,9 +81,6 @@
   <!-- Inline Quote Form (hidden by default) -->
   <div class="container my-4" id="auto-fields" style="display:none;">
     <!-- all auto fields go here -->
-    <!-- <div class="card shadow-sm border-0">
-      <div class="card-body"> -->
-        <!-- <h5 class="card-title" id="inlineQuoteFormTitle">Get a Quote</h5> -->
         <form id="inlineQuoteFormAuto">
           <div class="mb-3" id="autoField1">
             <label for="carDriverName" class="form-label">Full Name</label>
@@ -111,7 +111,6 @@
                 <option value="Tesla">Tesla</option>
                 <option value="Other">Other</option>
             </select>
-            <!-- <input type="text" class="form-control" id="vehicleMakeOther" name="vehicleMakeOther" style="display:none;"> -->
           </div>
           <div class="mb-3" id="autoField6">
             <label for="vehicleModel" class="form-label">Vehicle Model</label>
@@ -220,7 +219,6 @@
                 <input class="form-check-input" type="radio" name="coverageLevelHome" id="PremiumHome" value="Premium">
                 <label class="form-check-label" for="PremiumHome">Premium</label>
             </div>
-        
           </div>
                     <!-- add submit button -->
           <div class="mb-3">
