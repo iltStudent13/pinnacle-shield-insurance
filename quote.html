@@ -151,7 +151,7 @@
           </div>
           <!-- add submit button -->
           <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Get Quote</button>
+            <button type="submit" class="btn btn-primary">Calculate Quote</button>
           </div>
         </div>
 </form>
@@ -222,7 +222,7 @@
           </div>
                     <!-- add submit button -->
           <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Get Quote</button>
+            <button type="submit" class="btn btn-primary">Calculate Quote</button>
           </div>
         </div>
       </form>
@@ -296,7 +296,7 @@
             </div>
           </div>
           <input type="hidden" id="insuranceType" name="insuranceType">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Calculate Quote</button>
         </form>
       </div>
     </div>
@@ -336,48 +336,56 @@
       crossorigin="anonymous"
     ></script>
     <!-- end of processing -->
-    <script src="js/main.js"></script>
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          var typeRadios = document.querySelectorAll('input[name="insuranceType"]');
-          var autoFields = document.getElementById('auto-fields');
-          var homeFields = document.getElementById('home-fields');
-          var lifeFields = document.getElementById('life-fields');
+    <script src="js/quote.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var typeRadios = document.querySelectorAll('input[name="insuranceType"]');
+        var autoFields = document.getElementById('auto-fields');
+        var homeFields = document.getElementById('home-fields');
+        var lifeFields = document.getElementById('life-fields');
 
-          function showFields(selected) {
-            if (autoFields) autoFields.style.display = 'none';
-            if (homeFields) homeFields.style.display = 'none';
-            if (lifeFields) lifeFields.style.display = 'none';
-            // Map radio value to correct container id
-            var map = {
-              autoQuote: 'auto-fields',
-              homeQuote: 'home-fields',
-              lifeQuote: 'life-fields'
-            };
-            var selectedId = map[selected] || (selected + '-fields');
-            var selectedFields = document.getElementById(selectedId);
-            if (selectedFields) selectedFields.style.display = 'block';
-          }
+        function showFields(selected) {
+          if (autoFields) autoFields.style.display = 'none';
+          if (homeFields) homeFields.style.display = 'none';
+          if (lifeFields) lifeFields.style.display = 'none';
+          // Map radio value to correct container id
+          var map = {
+            autoQuote: 'auto-fields',
+            homeQuote: 'home-fields',
+            lifeQuote: 'life-fields'
+          };
+          var selectedId = map[selected] || (selected + '-fields');
+          var selectedFields = document.getElementById(selectedId);
+          if (selectedFields) selectedFields.style.display = 'block';
+        }
 
-          typeRadios.forEach(function(radio) {
-            radio.addEventListener('change', function() {
-              showFields(this.value);
-            });
-          });
-
-          // Make cards clickable by listening to label clicks
-          var cardLabels = document.querySelectorAll('label[for^="autoQuote"], label[for^="homeQuote"], label[for^="lifeQuote"]');
-          cardLabels.forEach(function(label) {
-            label.addEventListener('click', function() {
-              var forId = label.getAttribute('for');
-              var radio = document.getElementById(forId);
-              if (radio && !radio.checked) {
-                radio.checked = true;
-                radio.dispatchEvent(new Event('change', { bubbles: true }));
-              }
-            });
+        typeRadios.forEach(function(radio) {
+          radio.addEventListener('change', function() {
+            showFields(this.value);
           });
         });
-      </script>
+
+        // Make cards clickable by listening to label clicks
+        var cardLabels = document.querySelectorAll('label[for^="autoQuote"], label[for^="homeQuote"], label[for^="lifeQuote"]');
+        cardLabels.forEach(function(label) {
+          label.addEventListener('click', function() {
+            var forId = label.getAttribute('for');
+            var radio = document.getElementById(forId);
+            if (radio && !radio.checked) {
+              radio.checked = true;
+              radio.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          });
+        });
+
+        // Attach validateForm from quote.js to all forms
+        var autoForm = document.getElementById('inlineQuoteFormAuto');
+        var homeForm = document.getElementById('inlineQuoteFormHome');
+        var lifeForm = document.getElementById('inlineQuoteFormLife');
+        if (autoForm) autoForm.addEventListener('submit', validateForm);
+        if (homeForm) homeForm.addEventListener('submit', validateForm);
+        if (lifeForm) lifeForm.addEventListener('submit', validateForm);
+      });
+    </script>
   </body>
 </html>
