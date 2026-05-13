@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var lifeForm = document.getElementById("inlineQuoteFormLife");
 
   function handleFormSubmit(e) {
+    e.preventDefault();
     if (!validateForm(e)) return;
     // determine which form was submitted and process accordingly
     if (e.target && e.target.id === "inlineQuoteFormAuto") {
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var constructionType = document.getElementById("constructionType").value;
       var hasSecuritySystem =
         document.getElementById("hasSecuritySystem").checked;
-      var hasSprinklers = document.getElementById("hasSprinklers").checked;
+      var hasSprinklers = document.getElementById("hasFireSprinklers").checked;
       var coverageLevel = document.querySelector(
         'input[name="coverageLevelHome"]:checked',
       )?.value;
@@ -148,8 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (e.target && e.target.id === "inlineQuoteFormLife") {
       // Similar processing for life form inputs and premium calculation
     }
-    // Allow form to submit if needed (remove e.preventDefault if you want real submission)
-    e.preventDefault();
   }
 
   if (autoForm) autoForm.addEventListener("submit", handleFormSubmit); // Handles auto form submit

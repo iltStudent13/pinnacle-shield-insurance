@@ -150,14 +150,18 @@
 
         <!-- Coverage Level -->
           <div class="mb-4" id="autoField9">
-            <label for="coverageLevelAuto" class="form-label">Coverage Level</label>
-            <div class="btn-group w-100" role="group" aria-label="Coverage Level">
-              <input class="btn-check" type="radio" name="coverageLevelAuto" id="BasicAuto" value="Basic" required>
-              <label class="btn btn-outline-primary w-100" for="BasicAuto">Basic</label>
-              <input class="btn-check" type="radio" name="coverageLevelAuto" id="StandardAuto" value="Standard">
-              <label class="btn btn-outline-primary w-100" for="StandardAuto">Standard</label>
-              <input class="btn-check" type="radio" name="coverageLevelAuto" id="PremiumAuto" value="Premium">
-              <label class="btn btn-outline-primary w-100" for="PremiumAuto">Premium</label>
+            <label class="form-label">Coverage Level</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="coverageLevelAuto" id="BasicAuto" value="Basic" required>
+              <label class="form-check-label" for="BasicAuto">Basic</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="coverageLevelAuto" id="StandardAuto" value="Standard">
+              <label class="form-check-label" for="StandardAuto">Standard</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="coverageLevelAuto" id="PremiumAuto" value="Premium">
+              <label class="form-check-label" for="PremiumAuto">Premium</label>
             </div>
           </div>
           <!-- add submit button -->
@@ -227,14 +231,18 @@
           </div>
         </div>
         <div class="mb-3" id="homeField10">
-          <label for="coverageLevelHome" class="form-label">Coverage Level</label>
-          <div class="btn-group w-100" role="group" aria-label="Coverage Level">
-            <input class="btn-check" type="radio" name="coverageLevelHome" id="BasicHome" value="Basic" required>
-            <label class="btn btn-outline-primary w-100" for="BasicHome">Basic</label>
-            <input class="btn-check" type="radio" name="coverageLevelHome" id="StandardHome" value="Standard">
-            <label class="btn btn-outline-primary w-100" for="StandardHome">Standard</label>
-            <input class="btn-check" type="radio" name="coverageLevelHome" id="PremiumHome" value="Premium">
-            <label class="btn btn-outline-primary w-100" for="PremiumHome">Premium</label>
+          <label class="form-label">Coverage Level</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="coverageLevelHome" id="BasicHome" value="Basic" required>
+            <label class="form-check-label" for="BasicHome">Basic</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="coverageLevelHome" id="StandardHome" value="Standard">
+            <label class="form-check-label" for="StandardHome">Standard</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="coverageLevelHome" id="PremiumHome" value="Premium">
+            <label class="form-check-label" for="PremiumHome">Premium</label>
           </div>
         </div>
                     <!-- add submit button -->
@@ -245,78 +253,79 @@
       </form>
   <div class="container my-4" id="life-fields" style="display:none;">
     <form id="inlineQuoteFormLife">
-        <!-- all life fields go here -->
-          <div class="mb-3" id="lifeField1">
-            <label for="lifeName" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="lifeName" name="lifeName" minlength="2" maxlength="100" required>
-          </div>
-          <div class="mb-3" id="lifeField2">
-            <label for="lifeAge" class="form-label">Age</label>
-            <input type="number" class="form-control" id="lifeAge" name="lifeAge" min="18" max="85" step="1">
-            <div class="invalid-feedback">Please enter a valid age (18–85).</div>
-          </div>
-        <div class="mb-3" id="lifeField3">
-            <label for="lifeZipCode" class="form-label">Zip Code</label>
-            <input type="number" class="form-control" id="lifeZipCode" name="lifeZipCode" pattern="^\d{5}$" title="Enter exactly 5 digits" required>
-            <div class="invalid-feedback">Please enter exactly 5 digits (0–9).</div>
-          </div>
-          <div class="mb-3" id="lifeField4">
+      <div class="row">
+        <div class="mb-3 col-12 col-md-6 col-lg-4" id="lifeField1">
+          <label for="lifeName" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="lifeName" name="lifeName" minlength="2" maxlength="100" required>
+        </div>
+        <div class="mb-3 col-12 col-md-6 col-lg-2" id="lifeField2">
+          <label for="lifeAge" class="form-label">Age</label>
+          <input type="number" class="form-control" id="lifeAge" name="lifeAge" min="18" max="85" step="1">
+          <div class="invalid-feedback">Please enter a valid age (18–85).</div>
+        </div>
+        <div class="mb-3 col-12 col-md-6 col-lg-3" id="lifeField3">
+          <label for="lifeZipCode" class="form-label">Zip Code</label>
+          <input type="number" class="form-control" id="lifeZipCode" name="lifeZipCode" pattern="^\d{5}$" title="Enter exactly 5 digits" required>
+          <div class="invalid-feedback">Please enter exactly 5 digits (0–9).</div>
+        </div>
+        <div class="mb-3 col-12 col-md-6 col-lg-3" id="lifeField4">
           <label for="lifeGender" class="form-label">Gender</label>
-            <select id="lifeGender" name="lifeGender" class="form-select">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Non-binary</option>
-            </select>
-          </div>
-        <div class="mb-3" id="lifeField5">
-            <label for="smoker" class="form-label">Smoker</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="smoker" id="smokerYes" value="Yes" required>
-                <label class="form-check-label" for="smokerYes">Yes</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="smoker" id="smokerNo" value="No">
-                <label class="form-check-label" for="smokerNo">No</label>
-            </div>
-          </div>
-        <div class="mb-3" id="lifeField6">
-            <label for="lifeCoverageAmount" class="form-label">Coverage Amount</label>
-            <select id="lifeCoverageAmount" name="lifeCoverageAmount" class="form-select">
-                <option value="hundredThousand">100,000</option>
-                <option value="twoHundredFiftyThousand">250,000</option>
-                <option value="fiveHundredThousand">500,000</option>
-                <option value="oneMillion">1,000,000</option>
-            </select>
-          </div>
-        <div class="mb-3" id="lifeField7">
-            <label for="exerciseFrequency" class="form-label">Exercise Frequency</label>
-            <select id="exerciseFrequency" name="exerciseFrequency" class="form-select">
-                <option value="none">Rarely</option>
-                <option value="occasional">1-2 times/week</option>
-                <option value="regular">3-4 times/week</option>
-                <option value="frequent">5+ times/week</option>
-            </select>
-          </div>
-        <div class="mb-3" id="lifeField8">
-        <label for="coverageLevelLife" class="form-label">Coverage Level</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="coverageLevelLife" id="BasicLife" value="Basic" required>
-                <label class="form-check-label" for="BasicLife">Basic</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="coverageLevelLife" id="StandardLife" value="Standard">
-                <label class="form-check-label" for="StandardLife">Standard</label>
-            </div>
-            <div class="form-check">    
-                <input class="form-check-input" type="radio" name="coverageLevelLife" id="PremiumLife" value="Premium">
-                <label class="form-check-label" for="PremiumLife">Premium</label>
-            </div>
-          </div>
-          <input type="hidden" id="insuranceType" name="insuranceType">
-          <button type="submit" class="btn btn-primary">Calculate Quote</button>
-        </form>
+          <select id="lifeGender" name="lifeGender" class="form-select">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Non-binary</option>
+          </select>
+        </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="mb-3 col-12 col-md-6 col-lg-3" id="lifeField5">
+          <label for="smoker" class="form-label">Smoker</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="smoker" id="smokerYes" value="Yes" required>
+            <label class="form-check-label" for="smokerYes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="smoker" id="smokerNo" value="No">
+            <label class="form-check-label" for="smokerNo">No</label>
+          </div>
+        </div>
+        <div class="mb-3 col-12 col-md-6 col-lg-3" id="lifeField6">
+          <label for="lifeCoverageAmount" class="form-label">Coverage Amount</label>
+          <select id="lifeCoverageAmount" name="lifeCoverageAmount" class="form-select">
+            <option value="hundredThousand">100,000</option>
+            <option value="twoHundredFiftyThousand">250,000</option>
+            <option value="fiveHundredThousand">500,000</option>
+            <option value="oneMillion">1,000,000</option>
+          </select>
+        </div>
+        <div class="mb-3 col-12 col-md-6 col-lg-3" id="lifeField7">
+          <label for="exerciseFrequency" class="form-label">Exercise Frequency</label>
+          <select id="exerciseFrequency" name="exerciseFrequency" class="form-select">
+            <option value="none">Rarely</option>
+            <option value="occasional">1-2 times/week</option>
+            <option value="regular">3-4 times/week</option>
+            <option value="frequent">5+ times/week</option>
+          </select>
+        </div>
+        <div class="mb-3 col-12 col-md-6 col-lg-3" id="lifeField8">
+          <label for="coverageLevelLife" class="form-label">Coverage Level</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="coverageLevelLife" id="BasicLife" value="Basic" required>
+            <label class="form-check-label" for="BasicLife">Basic</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="coverageLevelLife" id="StandardLife" value="Standard">
+            <label class="form-check-label" for="StandardLife">Standard</label>
+          </div>
+          <div class="form-check">    
+            <input class="form-check-input" type="radio" name="coverageLevelLife" id="PremiumLife" value="Premium">
+            <label class="form-check-label" for="PremiumLife">Premium</label>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" id="insuranceType" name="insuranceType">
+      <button type="submit" class="btn btn-primary">Calculate Quote</button>
+    </form>
   </div>
 
  <!-- hidden table for quote calculations -->
