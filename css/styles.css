@@ -1,0 +1,110 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* .hidden {
+  display: none;
+} */
+
+body {
+  background-color: #e4e9f3;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.hover-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hero {
+  background-color: #0056b3;
+  text-align: center;
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+footer {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #212529;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* alter icons used on cards to flexible size and max size on cards */
+.card-img-top {
+  max-width: 100%;
+  height: auto;
+  max-height: 80px; /* or your preferred value */
+  object-fit: contain; /* ensures the whole image is visible */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: none;
+  color: inherit;
+  border-radius: 0;
+}
+
+footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+footer .container .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  footer .container .row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  footer .container .row > div[class^="col-"] {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  footer .container .row {
+    justify-content: center;
+    text-align: center;
+  }
+  footer .container .row > div[class^="col-"] {
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+  }
+}
