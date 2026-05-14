@@ -162,13 +162,19 @@ document.addEventListener("DOMContentLoaded", function () {
       var age = document.getElementById("lifeAge").value;
       var zip = document.getElementById("lifeZipCode").value;
       var gender = document.getElementById("lifeGender").value;
-      var smoker = document.querySelector('input[name="smoker"]:checked')?.value;
+      var smoker = document.querySelector(
+        'input[name="smoker"]:checked',
+      )?.value;
       var coverageAmount = document.getElementById("lifeCoverageAmount").value;
       var exercise = document.getElementById("exerciseFrequency").value;
-      var coverageLevel = document.querySelector('input[name="coverageLevelLife"]:checked')?.value;
-      var normalizedCoverageLevel = coverageLevel ? coverageLevel.toLowerCase() : undefined;
+      var coverageLevel = document.querySelector(
+        'input[name="coverageLevelLife"]:checked',
+      )?.value;
+      var normalizedCoverageLevel = coverageLevel
+        ? coverageLevel.toLowerCase()
+        : undefined;
       // For now, just a placeholder premium calculation (implement as needed)
-      var premium = 50.00;
+      var premium = 50.0;
       // TODO: Implement calculateLifePremium and showLifeQuoteBreakdown if needed
       showQuoteSummaryCard({
         name: name,
@@ -176,26 +182,75 @@ document.addEventListener("DOMContentLoaded", function () {
         monthlyPremium: premium,
       });
     }
-  // Populates and displays the summary card with customer name, insurance type, and premium values
-  function showQuoteSummaryCard(options) {
-    // options: { name, insuranceType, monthlyPremium }
-    var card = document.getElementById("quoteSummaryCard");
-    if (!card) return;
-    var nameEl = document.getElementById("summaryCustomerName");
-    var typeEl = document.getElementById("summaryInsuranceType");
-    var monthlyEl = document.getElementById("summaryMonthlyPremium");
-    var annualEl = document.getElementById("summaryAnnualPremium");
-    if (nameEl) nameEl.textContent = options.name || "";
-    if (typeEl) typeEl.textContent = options.insuranceType || "";
-    if (monthlyEl) monthlyEl.textContent = options.monthlyPremium ? "$" + Number(options.monthlyPremium).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) : "";
-    if (annualEl) annualEl.textContent = options.monthlyPremium ? "$" + (Number(options.monthlyPremium) * 12).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}) : "";
-    card.style.display = "block";
-  }
+    // Populates and displays the summary card with customer name, insurance type, and premium values
+    function showQuoteSummaryCard(options) {
+      // options: { name, insuranceType, monthlyPremium }
+      var card = document.getElementById("quoteSummaryCard");
+      if (!card) return;
+      var nameEl = document.getElementById("summaryCustomerName");
+      var typeEl = document.getElementById("summaryInsuranceType");
+      var monthlyEl = document.getElementById("summaryMonthlyPremium");
+      var annualEl = document.getElementById("summaryAnnualPremium");
+      if (nameEl) nameEl.textContent = options.name || "";
+      if (typeEl) typeEl.textContent = options.insuranceType || "";
+      if (monthlyEl)
+        monthlyEl.textContent = options.monthlyPremium
+          ? "$" +
+            Number(options.monthlyPremium).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })
+          : "";
+      if (annualEl)
+        annualEl.textContent = options.monthlyPremium
+          ? "$" +
+            (Number(options.monthlyPremium) * 12).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })
+          : "";
+      card.style.display = "block";
+    }
   }
 
   if (autoForm) autoForm.addEventListener("submit", handleFormSubmit); // Handles auto form submit
   if (homeForm) homeForm.addEventListener("submit", handleFormSubmit); // Handles home form submit
   if (lifeForm) lifeForm.addEventListener("submit", handleFormSubmit); // Handles life form submit
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  var btn = document.getElementById("getAnotherQuoteBtn");
+  if (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      // Hide summary card and table
+      var card = document.getElementById("quoteSummaryCard");
+      var table = document.getElementById("quote-summary");
+      if (card) card.style.display = "none";
+      if (table) table.style.display = "none";
+      // Reset all forms
+      var forms = [
+        document.getElementById("inlineQuoteFormAuto"),
+        document.getElementById("inlineQuoteFormHome"),
+        document.getElementById("inlineQuoteFormLife"),
+      ];
+      forms.forEach(function (form) {
+        if (form) form.reset();
+      });
+      // Unselect insurance type
+      var radios = document.querySelectorAll('input[name="insuranceType"]');
+      radios.forEach(function (r) {
+        r.checked = false;
+      });
+      // Hide all quote fields
+      var autoFields = document.getElementById("auto-fields");
+      var homeFields = document.getElementById("home-fields");
+      var lifeFields = document.getElementById("life-fields");
+      if (autoFields) autoFields.style.display = "none";
+      if (homeFields) homeFields.style.display = "none";
+      if (lifeFields) lifeFields.style.display = "none";
+    });
+  }
 });
 
 // Form validation to check for
