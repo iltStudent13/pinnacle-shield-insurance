@@ -285,14 +285,14 @@
             <label class="form-check-label" for="smokerYes">Yes</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="smoker" id="smokerNo" value="No">
+            <input class="form-check-input" type="radio" name="smoker" id="smokerNo" value="No" checked>
             <label class="form-check-label" for="smokerNo">No</label>
           </div>
         </div>
         <div class="mb-3 col-12 col-md-6 col-lg-3" id="lifeField6">
           <label for="lifeCoverageAmount" class="form-label">Coverage Amount</label>
           <select id="lifeCoverageAmount" name="lifeCoverageAmount" class="form-select">
-            <option value="hundredThousand">100,000</option>
+            <option value="hundredThousand" selected>100,000</option>
             <option value="twoHundredFiftyThousand">250,000</option>
             <option value="fiveHundredThousand">500,000</option>
             <option value="oneMillion">1,000,000</option>
@@ -308,6 +308,17 @@
           </select>
         </div>
         <div class="mb-3 col-12 col-md-6 col-lg-3" id="lifeField8">
+          <label for="condition" class="form-label">Pre-Existing Condition</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="condition" id="conditionYes" value="Yes">
+            <label class="form-check-label" for="conditionYes">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="condition" id="conditionNo" value="No" checked>
+            <label class="form-check-label" for="conditionNo">No</label>
+          </div>
+        </div>
+        <div class="mb-3 col-12 col-md-6 col-lg-3" id="lifeField9">
           <label for="coverageLevelLife" class="form-label">Coverage Level</label>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="coverageLevelLife" id="BasicLife" value="Basic" required>

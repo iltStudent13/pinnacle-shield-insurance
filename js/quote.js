@@ -166,16 +166,52 @@ document.addEventListener("DOMContentLoaded", function () {
         'input[name="smoker"]:checked',
       )?.value;
       var coverageAmount = document.getElementById("lifeCoverageAmount").value;
+      //   map coverage amount string values to numbers for calculation
+      var coverageAmountMap = {
+        hundredThousand: 100000,
+        twoHundredFiftyThousand: 250000,
+        fiveHundredThousand: 500000,
+        oneMillion: 1000000,
+      };
+      coverageAmount =
+        coverageAmountMap[coverageAmount] !== undefined
+          ? coverageAmountMap[coverageAmount]
+          : Number(coverageAmount);
+
       var exercise = document.getElementById("exerciseFrequency").value;
+      var preExistingCondition = document.querySelector(
+        'input[name="condition"]:checked',
+      )?.value;
       var coverageLevel = document.querySelector(
         'input[name="coverageLevelLife"]:checked',
       )?.value;
       var normalizedCoverageLevel = coverageLevel
         ? coverageLevel.toLowerCase()
         : undefined;
-      // For now, just a placeholder premium calculation (implement as needed)
-      var premium = 50.0;
-      // TODO: Implement calculateLifePremium and showLifeQuoteBreakdown if needed
+      // Log the inputs for the life form
+      console.log("Life Form Inputs:", {
+        name,
+        age,
+        zip,
+        gender,
+        smoker,
+        coverageAmount,
+        exercise,
+        preExistingCondition,
+        coverageLevel: normalizedCoverageLevel,
+      });
+      var lifeData = {
+        age: Number(age),
+        gender: gender,
+        smoker: smoker,
+        coverageAmount: coverageAmount,
+        exercise: exercise,
+        preExistingCondition: preExistingCondition,
+        coverageLevel: normalizedCoverageLevel,
+      };
+
+      var premium = calculateLifePremium(lifeData);
+      showLifeQuoteBreakdown(lifeData, premium);
       showQuoteSummaryCard({
         name: name,
         insuranceType: "Life Insurance",
@@ -506,6 +542,72 @@ function calculateHomePremium(data) {
   ).toFixed(2);
 }
 
+// Life functions can be implemented similarly based on the life insurance factors
+
+function getLifeAgeFactor(age) {
+  if (age >= 18 && age <= 30) return 1.0;
+  if (age <= 45) return 1.5;
+  if (age <= 60) return 2.5;
+  if (age <= 85) return 4.0;
+  return 4.0; // For ages above 85, we can use the highest factor
+}
+
+function getLifeSmokerFactor(smoker) {
+  return smoker.toLowerCase() === "yes" ? 2.0 : 1.0;
+}
+
+function getLifeExerciseFactor(exercise) {
+  switch (exercise.toLowerCase()) {
+    case "rarely":
+      return 1.3;
+    case "1-2 times/week":
+      return 1.1;
+    case "3-4 times/week":
+      return 1.0;
+    case "5+ times/week":
+      return 0.9;
+    default:
+      return 1.0;
+  }
+}
+
+function getLifePreExistingConditionFactor(condition) {
+  return condition.toLowerCase() === "yes" ? 1.5 : 1.0;
+}
+
+function getLifeGenderFactor(gender) {
+  switch (gender.toLowerCase()) {
+    case "male":
+      return 1.1;
+    case "female":
+      return 1.0;
+    case "non-binary":
+      return 1.05;
+    default:
+      return 1.0;
+  }
+}
+
+function calculateLifePremium(data) {
+  const baseRate = (Number(data.coverageAmount) * 0.0005) / 12;
+  const ageFactor = getLifeAgeFactor(data.age);
+  const smokerFactor = getLifeSmokerFactor(data.smoker);
+  const exerciseFactor = getLifeExerciseFactor(data.exercise);
+  const preExistingConditionFactor = getLifePreExistingConditionFactor(
+    data.preExistingCondition,
+  );
+  const genderFactor = getLifeGenderFactor(data.gender);
+
+  return (
+    baseRate *
+    ageFactor *
+    smokerFactor *
+    exerciseFactor *
+    preExistingConditionFactor *
+    genderFactor
+  ).toFixed(2);
+}
+
 // Populates and displays the quote breakdown table for auto or home insurance based on the calculated premium and the factors that contributed to it. It dynamically creates table rows for each factor, showing the user input and how it impacted the premium calculation. The table is then made visible to the user. For life insurance, a similar function can be created to show the breakdown based on life insurance factors.
 function showHomeQuoteBreakdown(data, premium) {
   var cardBody = document.getElementById("quote-summary");
@@ -587,6 +689,61 @@ function showAutoQuoteBreakdown(data, premium) {
     "Driving Record",
     data.drivingRecord,
     "×" + getAutoDrivingRecordFactor(data.drivingRecord),
+  );
+  addBreakdownRow(
+    tbody,
+    "Coverage Level",
+    data.coverageLevel,
+    "×" + coverageMultipliers[data.coverageLevel],
+  );
+  addBreakdownRow(tbody, "Total Monthly Premium", "", "$" + premium);
+  // Unhide the table/card
+  cardBody.style.display = "block";
+}
+
+function showLifeQuoteBreakdown(data, premium) {
+  // Similar to the auto and home breakdown functions, but based on life insurance factors
+  // This function can be implemented if a detailed breakdown for life insurance is desired
+  var cardBody = document.getElementById("quote-summary");
+  if (!cardBody) return;
+  var tbody = cardBody.querySelector(".table tbody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  addBreakdownRow(
+    tbody,
+    "Base Rate",
+    "$" + ((data.coverageAmount * 0.0005) / 12).toFixed(2),
+    "",
+  );
+  addBreakdownRow(
+    tbody,
+    "Age Factor",
+    data.age,
+    "×" + getLifeAgeFactor(data.age),
+  );
+  addBreakdownRow(
+    tbody,
+    "Smoker Factor",
+    data.smoker,
+    "×" + getLifeSmokerFactor(data.smoker),
+  );
+  addBreakdownRow(
+    tbody,
+    "Exercise Factor",
+    data.exercise,
+    "×" + getLifeExerciseFactor(data.exercise),
+  );
+  addBreakdownRow(
+    tbody,
+    "Pre-Existing Condition Factor",
+    data.preExistingCondition,
+    "×" + getLifePreExistingConditionFactor(data.preExistingCondition),
+  );
+  addBreakdownRow(
+    tbody,
+    "Gender Factor",
+    data.gender,
+    "×" + getLifeGenderFactor(data.gender),
   );
   addBreakdownRow(
     tbody,
