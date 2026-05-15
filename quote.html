@@ -79,7 +79,7 @@
 </div>
   </section>
   <!-- Inline Quote Form (hidden by default) -->
-  <div class="container my-4" id="auto-fields" style="display:none;">
+  <div class="container my-4 d-none" id="auto-fields">
 
     <!-- all auto fields go here -->
         <form id="inlineQuoteFormAuto">
@@ -89,16 +89,17 @@
             <div class="col-sm-6">
             <label for="carDriverName" class="form-label">Full Name</label>
             <input type="text" class="form-control" id="carDriverName" name="carDriverName" minlength="2" maxlength="100" required>
+            <div class="invalid-feedback" id="carDriverNameError">Please enter a valid full name (2–100 characters).</div>
           </div>
           <div class="col-sm-3" id="autoField2">
             <label for="carDriverAge" class="form-label">Age</label>
             <input type="number" class="form-control" id="carDriverAge" name="carDriverAge" min="16" max="100" step="1" required>
-            <div class="invalid-feedback">Please enter a valid age (16–100).</div>
+            <div class="invalid-feedback" id="carDriverAgeError">Please enter a valid age (16–100).</div>
           </div>
           <div class="col-sm-3" id="autoField3">
               <label for="carZipCode" class="form-label">Zip Code</label>
               <input type="number" class="form-control" id="carZipCode" name="carZipCode" pattern="^\d{5}$" title="Enter exactly 5 digits" required>
-              <div class="invalid-feedback">Please enter exactly 5 digits (0–9).</div>
+              <div class="invalid-feedback" id="carZipCodeError">Please enter exactly 5 digits (0–9).</div>
             </div>
           </div>
 
@@ -107,7 +108,7 @@
           <div class="col-sm-3" id="autoField4">
             <label for="vehicleYear" class="form-label">Vehicle Year</label>
             <input type="number" class="form-control" id="vehicleYear" name="vehicleYear" min="1990" max="2026" step="1" required>
-            <div class="invalid-feedback">Please enter a valid year (1990–2026).</div>
+            <div class="invalid-feedback" id="vehicleYearError">Please enter a valid year (1990–2026).</div>
           </div>
           <div class="col-sm-3" id="autoField5">
             <label for="vehicleMake" class="form-label">Vehicle Make</label>
@@ -119,10 +120,12 @@
                 <option value="Tesla">Tesla</option>
                 <option value="Other">Other</option>
             </select>
+            <div class="invalid-feedback" id="vehicleMakeError">Please select a vehicle make.</div>
           </div>
           <div class="col-sm-6" id="autoField6">
             <label for="vehicleModel" class="form-label">Vehicle Model</label>
             <input type="text" class="form-control" id="vehicleModel" name="vehicleModel" minlength="1" maxlength="50" required>
+            <div class="invalid-feedback" id="vehicleModelError">Please enter a valid vehicle model (1–50 characters).</div>
           </div>
         </div>
 
@@ -136,6 +139,7 @@
                 <option value="10000-20000">10,000-20,000</option>
                 <option value="20000-50000">20,000+</option>
             </select>
+            <div class="invalid-feedback" id="vehicleMileageError">Please select your annual mileage.</div>
           </div>
           <div class="col-md-6" id="autoField8">
             <label for="drivingRecord" class="form-label">Driving Record</label>
@@ -145,6 +149,7 @@
                 <option value="twoPlusTickets">2+ Tickets</option>
                 <option value="accident">Accident in Last 3 Years</option>
             </select>
+            <div class="invalid-feedback" id="drivingRecordError">Please select your driving record.</div>
           </div>
         </div>
 
@@ -163,6 +168,7 @@
               <input class="form-check-input" type="radio" name="coverageLevelAuto" id="PremiumAuto" value="Premium">
               <label class="form-check-label" for="PremiumAuto">Premium</label>
             </div>
+            <div class="invalid-feedback" id="coverageLevelAutoError">Please select a coverage level.</div>
           </div>
           <!-- add submit button -->
           <div class="mt-4 mb-3">
@@ -171,7 +177,7 @@
         </div>
 </form>
 </div>
-<div class="container my-4" id="home-fields" style="display:none;">
+<div class="container my-4 d-none" id="home-fields">
   <form id="inlineQuoteFormHome">
         <!-- all home fields go here -->
         <div class="row g-2 mb-3">
@@ -251,7 +257,7 @@
           </div>
         </div>
       </form>
-  <div class="container my-4" id="life-fields" style="display:none;">
+  <div class="container my-4 d-none" id="life-fields">
     <form id="inlineQuoteFormLife">
       <div class="row">
         <div class="mb-3 col-12 col-md-6 col-lg-4" id="lifeField1">

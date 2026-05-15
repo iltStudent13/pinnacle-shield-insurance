@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var lifeFields = document.getElementById("life-fields");
 
   function showFields(selected) {
-    if (autoFields) autoFields.style.display = "none";
-    if (homeFields) homeFields.style.display = "none";
-    if (lifeFields) lifeFields.style.display = "none";
+    if (autoFields) autoFields.classList.add("d-none");
+    if (homeFields) homeFields.classList.add("d-none");
+    if (lifeFields) lifeFields.classList.add("d-none");
     // Map radio value to correct container id
     var map = {
       autoQuote: "auto-fields",
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     var selectedId = map[selected] || selected + "-fields";
     var selectedFields = document.getElementById(selectedId);
-    if (selectedFields) selectedFields.style.display = "block";
+    if (selectedFields) selectedFields.classList.remove("d-none");
   }
 
   // Listen for changes to insurance type radios
@@ -84,6 +84,19 @@ document.addEventListener("DOMContentLoaded", function () {
       var vehicleMake = document.getElementById("vehicleMake").value;
       var vehicleModel = document.getElementById("vehicleModel").value.trim();
       var mileageRaw = document.getElementById("vehicleMileage").value;
+      // Run name through validateName
+      if (!validateName(name)) {
+        var nameField = document.getElementById("carDriverName");
+        nameField.classList.add("is-invalid");
+        var nameError = document.getElementById("carDriverNameError");
+        if (nameError) {
+          nameError.textContent =
+            "Please enter a valid name (letters and spaces only).";
+          nameError.style.display = "block";
+        }
+        return;
+      }
+
       // Map string values to representative numbers for calculation
       var mileageMap = {
         "Under 5000": 4000,
@@ -309,16 +322,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Form validation to check for
-//  1. An insurance type is selected
-//  2. All required fields for that type are filled in
-//  3. Numeric fields are within the valid range
-//  4. ZIP code is exactly 5 digits (use a regex: /^\d{5}$/)
-//  5. A coverage level is selected
-
 function validateZipCode(zip) {
   return /^\d{5}$/.test(zip);
 }
+
+function validateName(name) {
+  // Name should not be empty and only contain letters
+  return /^[a-zA-Z\s]+$/.test(name.trim());
+}
+
 // is-invalid class to invalid inputs
 // function showError(inputElement, message) {
 //   inputElement.classList.add("is-invalid");
@@ -405,16 +417,6 @@ function validateForm(e) {
     }
   }
 
-  //   function validateForm(data) {
-  //     let isValid = true;
-
-  //     if (data.carDriverName.length < 2) {
-  //       showError("carDriverName", "Please enter a valid full name.");
-  //       isValid = false;
-  //     }
-  //     return isValid;
-  //   }
-
   // Validate required fields
   for (var i = 0; i < requiredFields.length; i++) {
     var field = document.getElementById(requiredFields[i]);
@@ -458,38 +460,6 @@ function addBreakdownRow(tbody, factor, userValue, impact) {
   row.appendChild(dataImpact);
   tbody.appendChild(row);
 }
-
-// Processing quote submission
-/* Auto rate calculation based on:
-Factor Formula
-1. Base monthly rate $75
-2. Age factor Under 25: ×1.5 / 25–65: ×1.0 / Over 65: ×1.3
-3. Vehicle age (years old) Under 3 years: ×1.3 / 3–10 years: ×1.0 / Over 10 years: ×0.8
-4. Mileage factor Under 5k: ×0.8 / 5–10k: ×1.0 / 10–15k: ×1.1 / 15–20k: ×1.3 / Over 20k: ×1.5
-5. Driving record Clean: ×1.0 / 1 ticket: ×1.2 / 2+ tickets: ×1.5 / Accident: ×1.8
-6. Coverage level Basic: ×0.8 / Standard: ×1.0 / Premium: ×1.4
-Monthly premium = Base rate × Age factor × Vehicle age factor × Mileage factor × Driving record × Coverage level
-
-Home rate calculation based on:
-Factor formula
-1. Base monthly rate Home value × 0.003 / 12
-2. Year built factor Before 1970: ×1.4 / 1970–1999: ×1.1 / 2000+: ×1.0
-3. Construction factor Wood: ×1.2 / Brick: ×1.0 / Concrete: ×0.9 / Steel: ×0.85
-4. Size factor Per square foot: + $0.01/month
-5. Security discount Has security system: ×0.95
-6. Sprinkler discount Has sprinklers: ×0.92
-7. Coverage level Basic: ×0.8 / Standard: ×1.0 / Premium: ×1.4
-
-Life rate calculation based on:
-Factor formula
-1. Base monthly rate Coverage amount × 0.0005 / 12
-2. Age factor 18–30: ×1.0 / 31–45: ×1.5 / 46–60: ×2.5 / 61–85: ×4.0
-3. Smoker factor No: ×1.0 / Yes: ×2.0
-4. Exercise frequency Rarely: ×1.3 / 1–2/week: ×1.1 / 3–4/week: ×1.0 / 5+/week: ×0.9
-5. Pre-existing conditions No: ×1.0 / Yes: ×1.5
-6. Gender factor Male: ×1.1 / Female: ×1.0 / Non-binary: ×1.05
-7. Coverage level Basic: ×0.8 / Standard: ×1.0 / Premium: ×1.4
-*/
 
 // base coverage multipliers for each insurance type
 const coverageMultipliers = {
