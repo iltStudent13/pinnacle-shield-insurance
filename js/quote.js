@@ -42,6 +42,26 @@ document.addEventListener("DOMContentLoaded", function () {
         radio.checked = true;
         radio.dispatchEvent(new Event("change", { bubbles: true }));
       }
+      // Hide summary card and table when a new card is selected
+      var card = document.getElementById("quoteSummaryCard");
+      var table = document.getElementById("quote-summary");
+      if (card) card.style.display = "none";
+      if (table) table.style.display = "none";
+      // Clear errors for all forms
+      var forms = [
+        document.getElementById("inlineQuoteFormAuto"),
+        document.getElementById("inlineQuoteFormHome"),
+        document.getElementById("inlineQuoteFormLife"),
+      ];
+      forms.forEach(function (form) {
+        if (form) clearErrors(form);
+      });
+      // Hide insurance type error if present
+      var insuranceTypeError = document.getElementById("insuranceTypeError");
+      if (insuranceTypeError) {
+        insuranceTypeError.textContent = "";
+        insuranceTypeError.style.display = "none";
+      }
     });
   });
 
@@ -300,18 +320,23 @@ function validateZipCode(zip) {
   return /^\d{5}$/.test(zip);
 }
 // is-invalid class to invalid inputs
-function showError(inputElement, message) {
-  inputElement.classList.add("is-invalid");
-  var feedback = inputElement.nextElementSibling;
-  if (feedback && feedback.classList.contains("invalid-feedback")) {
-    feedback.textContent = message;
-  }
-}
+// function showError(inputElement, message) {
+//   inputElement.classList.add("is-invalid");
+//   var feedback = inputElement.nextElementSibling;
+//   if (feedback && feedback.classList.contains("invalid-feedback")) {
+//     feedback.textContent = message;
+//   }
+// }
 
 function clearErrors(form) {
   var invalids = form.querySelectorAll(".is-invalid");
   invalids.forEach(function (el) {
     el.classList.remove("is-invalid");
+  });
+  var feedbacks = form.querySelectorAll(".invalid-feedback");
+  feedbacks.forEach(function (el) {
+    el.textContent = "";
+    el.style.display = "none";
   });
 }
 
@@ -320,7 +345,12 @@ function validateForm(e) {
     'input[name="insuranceType"]:checked',
   );
   if (!insuranceType) {
-    alert("Please select an insurance type.");
+    // Show an inline error for insurance type selection
+    var insuranceTypeError = document.getElementById("insuranceTypeError");
+    if (insuranceTypeError) {
+      insuranceTypeError.textContent = "Please select an insurance type.";
+      insuranceTypeError.style.display = "block";
+    }
     if (e && typeof e.preventDefault === "function") e.preventDefault();
     return false;
   }
@@ -359,12 +389,37 @@ function validateForm(e) {
   var form = e && e.target ? e.target : document;
   clearErrors(form);
 
+  //   New attempt at validate required fields
+  function showError(fieldId, message) {
+    const input = document.getElementById(fieldId);
+    if (!input) return;
+    input.classList.add("is-invalid");
+    // Find the next .invalid-feedback element after the input
+    let error = input.nextElementSibling;
+    while (error && !error.classList.contains("invalid-feedback")) {
+      error = error.nextElementSibling;
+    }
+    if (error) {
+      error.textContent = message;
+      error.style.display = "block";
+    }
+  }
+
+  //   function validateForm(data) {
+  //     let isValid = true;
+
+  //     if (data.carDriverName.length < 2) {
+  //       showError("carDriverName", "Please enter a valid full name.");
+  //       isValid = false;
+  //     }
+  //     return isValid;
+  //   }
+
   // Validate required fields
   for (var i = 0; i < requiredFields.length; i++) {
     var field = document.getElementById(requiredFields[i]);
     if (!field || !field.value.trim()) {
       showError(field, "This field is required.");
-      alert("Please fill in all required fields.");
       if (e && typeof e.preventDefault === "function") e.preventDefault();
       return false;
     }
@@ -380,7 +435,6 @@ function validateForm(e) {
   );
   if (zipField && !validateZipCode(zipField.value)) {
     showError(zipField, "Please enter a valid 5-digit ZIP code.");
-    alert("Please enter a valid 5-digit ZIP code.");
     if (e && typeof e.preventDefault === "function") e.preventDefault();
     return false;
   }
@@ -526,7 +580,7 @@ function calculateHomePremium(data) {
   const baseRate = (data.homeValue * 0.003) / 12;
   const yearBuiltFactor = getHomeYearBuiltFactor(data.yearBuilt);
   const constructionFactor = getHomeConstructionFactor(data.constructionType);
-  const sizeFactor = data.squareFootage * 0.01;
+  const sizeFactor = (data.squareFootage * 0.01) / 12; // Convert to monthly
   const securityDiscount = data.hasSecuritySystem ? 0.95 : 1.0;
   const sprinklerDiscount = data.hasSprinklers ? 0.92 : 1.0;
   const coverageLevelMultiplier = coverageMultipliers[data.coverageLevel];
