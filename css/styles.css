@@ -32,9 +32,7 @@ body {
 }
 
 .hero {
-  background-color: #0056b3;
   text-align: center;
-  color: white;
   padding: 50px 20px;
   text-align: center;
 }
@@ -55,7 +53,7 @@ img {
 .card-img-top {
   max-width: 100%;
   height: auto;
-  max-height: 80px; /* or your preferred value */
+  max-height: 80px;
   object-fit: contain; /* ensures the whole image is visible */
   display: block;
   margin-left: auto;
@@ -81,6 +79,25 @@ img {
   padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+input.is-invalid,
+select.isinvalid {
+  border-color: #c62828;
+  background: #fff5f5;
+}
+
+.form-control.is-invalid:focus {
+  border-color: #c62828;
+  box-shadow: 0 0 0 0.2rem rgba(198, 40, 40, 0.25);
+}
+
+.error {
+  display: block;
+  min-height: 18px;
+  margin-top: 4px;
+  color: #c62828;
+  font-size: 14px;
 }
 
 footer .container {
